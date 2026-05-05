@@ -1,3 +1,103 @@
+# iPhoneBlur: A Difficulty-Stratified Benchmark for Consumer Device Motion Deblurring
+
+[![Paper](https://img.shields.io/badge/Paper-NeurIPS%202026-blue)](https://arxiv.org/)
+[![Dataset](https://img.shields.io/badge/Dataset-Kaggle-20BEFF)](https://www.kaggle.com/datasets/shafi09/iphoneblur)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![Code License: MIT](https://img.shields.io/badge/Code%20License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
+**First severity-stratified motion deblurring benchmark** for deployment-critical evaluation on edge devices. Unlike existing datasets that report only aggregate metrics, iPhoneBlur categorizes 7,400 blur-sharp image pairs into three validated difficulty levels (Easy, Medium, Hard).
+
+[**Paper**](https://arxiv.org/) | [**Dataset**](https://www.kaggle.com/datasets/shafi09/iphoneblur) | [**Supplementary**](https://arxiv.org/)
+
+---
+
+## 🎯 **Key Features**
+
+- **7,400 high-quality blur-sharp pairs** (130% larger than GoPro)
+- **Three validated difficulty levels** based on PSNR thresholds (Easy ≥30 dB, Medium 24-30 dB, Hard <24 dB)
+- **Motion gradient validation**: Spearman ρ=-0.407 (p<10⁻³⁰⁰), 2.2× motion increase across tiers
+- **ISP artifact validation**: 100% suppression (Cohen's d=2.32), confirming synthesis quality
+- **Video-level train/test split**: Zero overlap between 39 train and 12 test videos
+- **Superior quality**: Mean SSIM 0.85 (vs GoPro 0.81)
+- **1920×1080 resolution** JPEG images from iPhone 17 Pro (177-240 fps)
+
+---
+
+## 📊 **Dataset Statistics**
+
+| Metric | Easy | Medium | Hard | Overall |
+|--------|------|--------|------|---------|
+| **Samples** | 1,277 (17.3%) | 3,895 (52.6%) | 2,228 (30.1%) | 7,400 |
+| **PSNR (dB)** | 31.7±1.2 | 26.5±1.7 | 22.6±1.0 | 26.2±3.4 |
+| **SSIM** | 0.96±0.01 | 0.87±0.05 | 0.75±0.06 | 0.85±0.09 |
+| **Motion (px/fr)** | 6.0±5.0 | 11.3±5.6 | 13.2±4.3 | 11.0±5.7 |
+| **Contrast** | 0.264±0.020 | 0.269±0.021 | 0.274±0.022 | 0.270±0.022 |
+
+---
+
+## 🚀 **Quick Start**
+
+### **1. Download Dataset**
+
+```bash
+# Option A: Kaggle API
+kaggle datasets download -d shafi09/iphoneblur
+unzip iphoneblur.zip
+
+# Option B: Manual download
+# Visit https://www.kaggle.com/datasets/shafi09/iphoneblur
+```
+
+### **2. Install Dependencies**
+
+```bash
+pip install torch torchvision numpy opencv-python pillow pandas
+```
+
+### **3. Load Dataset**
+
+```python
+import pandas as pd
+from PIL import Image
+import os
+
+# Load metadata
+metadata = pd.read_csv('iPhoneBlur/metadata/train_metadata.csv')
+
+# Load a sample
+sample = metadata.iloc[0]
+blur_img = Image.open(f"iPhoneBlur/train/{sample['video']}/blur/{sample['img_id']}.jpg")
+sharp_img = Image.open(f"iPhoneBlur/train/{sample['video']}/sharp/{sample['img_id']}.jpg")
+
+print(f"Difficulty: {sample['difficulty']}")
+print(f"PSNR: {sample['psnr']:.2f} dB")
+print(f"Motion: {sample['motion']:.2f} px/frame")
+```
+
+---
+
+## 📁 **Dataset Structure**
+
+iPhoneBlur/
+├── train/                          # Training set (5,714 samples)
+│   ├── IMG_2139/
+│   │   ├── blur/                   # Blurred images
+│   │   │   ├── 00000.jpg
+│   │   │   ├── 00001.jpg
+│   │   │   └── ...
+│   │   └── sharp/                  # Sharp ground truth
+│   │       ├── 00000.jpg
+│   │       ├── 00001.jpg
+│   │       └── ...
+│   └── [38 more videos]/
+├── test/                           # Test set (1,686 samples)
+│   └── [12 videos, same structure as train]
+└── metadata/
+├── complete_metadata.csv       # All 7,400 samples with 20 metadata fields
+├── train_metadata.csv          # Training set metadata
+├── test_metadata.csv           # Test set metadata
+└── dataset_info.json           # Dataset configuration
+
 ---
 
 ## 📋 **Metadata Fields**
