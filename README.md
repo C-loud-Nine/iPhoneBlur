@@ -1,4 +1,4 @@
-# iPhoneBlur: A Photorealistic Motion Blur Dataset from iPhone Videos
+# iPhoneBlur: A Difficulty-Stratified Benchmark for Consumer Device Motion Deblurring
 
 [![Paper](https://img.shields.io/badge/Paper-NeurIPS%202026-blue)](https://arxiv.org)
 [![Dataset](https://img.shields.io/badge/Dataset-Kaggle-20BEFF)](https://kaggle.com/datasets/shafi09/iphoneblur)
