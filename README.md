@@ -1,15 +1,10 @@
 # iPhoneBlur: A Difficulty-Stratified Benchmark for Consumer Device Motion Deblurring
 
-[![Paper](https://img.shields.io/badge/Paper-NeurIPS%202026-blue)](https://arxiv.org)
 [![Dataset](https://img.shields.io/badge/Dataset-Kaggle-20BEFF)](https://kaggle.com/datasets/shafi09/iphoneblur)
 [![Models](https://img.shields.io/badge/Models-HuggingFace-yellow)](https://huggingface.co/Shafi99/iPhoneBlur_Finetune_Models)
 [![License](https://img.shields.io/badge/License-CC%20BY%204.0-green)](LICENSE)
 
 Official implementation and benchmark for **iPhoneBlur**, a motion blur dataset containing 7,400 blur-sharp image pairs extracted from 51 iPhone videos, specifically designed to evaluate image deblurring models under real-world camera ISP conditions.
-
-> **Abdullah Al Shafi**, Kazi Saeed Alam  
-> *Khulna University of Engineering & Technology (KUET)*  
-> **NeurIPS 2026 Datasets and Benchmarks Track (Under Review)**
 
 ---
 
